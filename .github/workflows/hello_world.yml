@@ -6,7 +6,9 @@ name: Hello World
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - develop
   pull_request:
     branches: [ master ]
 
@@ -24,7 +26,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
@@ -45,4 +47,16 @@ jobs:
     steps:
       - name: Print Hello World Windows
         run: echo 'Hello world rodando no windows'
+  
+  hello-world-macos:
+    name: Hello World MacOS
+    needs:
+      - hello-world-ubuntu
+      - hello-world-windows
+    runs-on: macos-latest
+    
+    steps:
+      - name: Print Hello World MacoOS
+        run: echo 'Hello world rodando no MacOS'
+
     
